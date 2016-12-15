@@ -1,4 +1,4 @@
-var newrelic = require('newrelic'),
+//var newrelic = require('newrelic'),
 config = require('./config.json'),
 http   = require('http'),
 twilio = require('twilio'),
@@ -14,41 +14,41 @@ http.createServer(function (req, res) {
   // If text message
   if(query.MessageSid){
     // Forward the SMS text message
-    client.sendMessage({
-      to: config.RECIPIENT,
-      from: config.SENDER,
-      body: 'SMS from: ' + query.From + '\nMsg: ' + query.Body
-      }, function(err, text) { //this function is executed when a response is received from Twilio
-      if(err){
-        console.dir(err);
-      } else { // "err" is an error received during the request, if any
-        console.log('Forwarded text to: ' + config.RECIPIENT +'\nMessage: ' + query.Body);
-      }
-    });
+    // client.sendMessage({
+    //   to: config.RECIPIENT,
+    //   from: config.SENDER,
+    //   body: 'SMS from: ' + query.From + '\nMsg: ' + query.Body
+    //   }, function(err, text) { //this function is executed when a response is received from Twilio
+    //   if(err){
+    //     console.dir(err);
+    //   } else { // "err" is an error received during the request, if any
+    //     console.log('Forwarded text to: ' + config.RECIPIENT +'\nMessage: ' + query.Body);
+    //   }
+    // });
   } else if(query.From === config.FRONT_DOOR_NUMBER){
-    twiml.say('Hey, come up to suite ' + config.SUITE_NUMBER, {
-      voice:'woman',
-      language:'en-gb'
+    twiml.say('Bonjour, première porte à gauche dans le couloir ', {
+      voice:'alice',
+      language:'fr-FR'
     });
     twiml.pause();
-    twiml.play({digits:'6'});
+    twiml.play({digits:'*'});
     twiml.pause();
 
     res.writeHead(200, {'Content-Type': 'text/xml'});
     res.end(twiml.toString());
 
     //Send an SMS text message
-    client.sendMessage({
-      to: config.RECIPIENT,
-      from: config.SENDER,
-      body: 'Just let someone in.'
-      }, function(err, text) { //this function is executed when a response is received from Twilio
-      if(err){
-        console.dir(err);
-      } else { // "err" is an error received during the request, if any
-        console.log('Sent text to ' + config.RECIPIENT);
-      }
-    });
+    // client.sendMessage({
+    //   to: config.RECIPIENT,
+    //   from: config.SENDER,
+    //   body: 'Just let someone in.'
+    //   }, function(err, text) { //this function is executed when a response is received from Twilio
+    //   if(err){
+    //     console.dir(err);
+    //   } else { // "err" is an error received during the request, if any
+    //     console.log('Sent text to ' + config.RECIPIENT);
+    //   }
+    // });
   } else {
     twiml.dial(config.RECIPIENT); // Forward call to recipients number if not from front door
     res.writeHead(200, {'Content-Type': 'text/xml'});
