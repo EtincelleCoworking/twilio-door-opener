@@ -2,6 +2,9 @@
   "name": "twilio-door-opener",
   "version": "1.0.0",
   "description": "Automatically respond to door buzzer and open the door",
+  "engines" : {
+    "node" : ">=6.11.1 <7"
+  },
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
