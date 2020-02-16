@@ -6,7 +6,8 @@ http = require('http'),
 
 http.createServer(function (req, res) {
     var query = url.parse(req.url, true).query;
-    console.dir(query);
+    //console.dir(query);
+    console.log(query);
     var twiml = new twilio.TwimlResponse();
     console.log('Call from [' + query.From + '], expecting [' + process.env.FRONT_DOOR_NUMBER + ']');
     if (query.From === process.env.FRONT_DOOR_NUMBER) {
