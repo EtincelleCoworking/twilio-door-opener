@@ -6,12 +6,12 @@ http = require('http'),
     url = require('url');
 
 http.createServer(function (req, res) {
-    var query = url.parse(req.url, true).query;
-    console.dir(query);
-    console.log(query.From);
+//    var query = url.parse(req.url, true).query;
+//    console.dir(query);
+//    console.log(query.From);
     var twiml = new twilio.TwimlResponse();
-    console.log('Call from [' + query.From + '], expecting [' + process.env.FRONT_DOOR_NUMBER + ']');
-    if (query.From === process.env.FRONT_DOOR_NUMBER) {
+//    console.log('Call from [' + query.From + '], expecting [' + process.env.FRONT_DOOR_NUMBER + ']');
+//    if (query.From === process.env.FRONT_DOOR_NUMBER) {
         console.log('Greeting.');
         twiml.say('Bienvenue chez étincelle coworking.', {
             voice: 'alice',
@@ -53,10 +53,10 @@ http.createServer(function (req, res) {
             res.writeHead(500, {'Content-Type': 'text/plain'});
             res.end('Internal error');
         });
-    } else {
-        res.writeHead(404, {'Content-Type': 'text/plain'});
-        res.end('File not found');
-    }
+//    } else {
+//        res.writeHead(404, {'Content-Type': 'text/plain'});
+//        res.end('File not found');
+//    }
 }).listen(port);
 
 console.log('TwiML servin\' server running on PORT: ' + port);
