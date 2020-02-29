@@ -1,4 +1,5 @@
 http = require('http'),
+    https = require('https'),
     twilio = require('twilio'),
     client = require('twilio')(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN),
     port = (process.env.PORT || 3000),
@@ -16,14 +17,43 @@ http.createServer(function (req, res) {
             voice: 'alice',
             language: 'fr-FR'
         });
-        console.log('Opening the door...');
-        twiml.pause();
-        twiml.play({digits: '*'});
-        twiml.pause();
 
-        res.writeHead(200, {'Content-Type': 'text/xml'});
-        res.end(twiml.toString());
-    }else{
+        https.get(process.env.DOOR_STATUS_API_URL, (resp) => {
+            let data = '';
+
+            // A chunk of data has been recieved.
+            resp.on('data', (chunk) => {
+                data += chunk;
+            });
+
+            // The whole response has been received. Print out the result.
+            resp.on('end', () => {
+                if (data === 'Yes') {
+                    console.log('Opening the door...');
+                    twiml.pause();
+                    twiml.play({digits: '*'});
+                    twiml.pause();
+
+                    res.writeHead(200, {'Content-Type': 'text/xml'});
+                    res.end(twiml.toString());
+                } else {
+                    console.log('Opening the door...');
+                    twiml.say('Nos bureaux sont actuellement fermés.', {
+                        voice: 'alice',
+                        language: 'fr-FR'
+                    });
+
+                    res.writeHead(200, {'Content-Type': 'text/xml'});
+                    res.end(twiml.toString());
+                }
+            });
+
+        }).on("error", (err) => {
+            console.log("Error: " + err.message);
+            res.writeHead(500, {'Content-Type': 'text/plain'});
+            res.end('Internal error');
+        });
+    } else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end('File not found');
     }
