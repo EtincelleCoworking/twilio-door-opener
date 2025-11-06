@@ -21,6 +21,7 @@
   "homepage": "https://github.com/mgingras/twilio-door-opener",
   "dependencies": {
     "twilio": "^5.10.4",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "https": "^1.0.0"
   }
 }
