@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/mgingras/twilio-door-opener",
   "dependencies": {
-    "twilio": "^5.10.4",
+    "twilio": "^5.10.4"
   }
 }
