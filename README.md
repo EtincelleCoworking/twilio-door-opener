@@ -13,6 +13,7 @@ We wanted to automate this.
    * `ACCOUNT_SID`
    * `AUTH_TOKEN`
    * `FRONT_DOOR_NUMBER`
+   * 'DOOR_STATUS_API_UR'
 3. Deploy to Heroku.
 4. Point your Twilio number @ the URL for your Heroku app.
 
