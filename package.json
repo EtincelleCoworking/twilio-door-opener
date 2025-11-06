@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/mgingras/twilio-door-opener",
   "dependencies": {
-    "newrelic": "^1.18.0",
-    "twilio": "^1.11.1"
+    "twilio": "^5.10.4",
+    "express": "^5.1.0"
   }
 }
