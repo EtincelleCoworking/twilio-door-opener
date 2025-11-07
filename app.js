@@ -11,7 +11,7 @@ exports.handler = function(context, event, callback) {
         twiml.say({
             voice: 'Google.fr-FR-Chirp3-HD-Aoede',
             language: 'fr-FR'
-        }, 'Bienvenue chez Etincelle Coworking. Poussez le battant de gauche et montez au premier étage.');
+        }, 'Bienvenue chez étincelle coworking. Nos bureaux sont situés au premier étage.');
         console.log('Opening the door...');
         twiml.pause();
         twiml.play({digits: '*'});
